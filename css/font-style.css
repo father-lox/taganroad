@@ -1,0 +1,11 @@
+@font-face {
+    font-family: "Tahoma Regular";
+    src: url("../fonts/tahoma.ttf");
+    font-size: 14px;
+}
+
+@font-face {
+    font-family: "Tahoma Bold";
+    src: url("../fonts/tahomabd.ttf");
+    font-size: 14px;
+}
