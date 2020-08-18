@@ -17,12 +17,12 @@
         </header>
         <nav>
             <ul>
-                <a href="#" class="activeURL"><li>Маршрут</li></a>
-                <a href="#"><li>Информация</li></a>
-                <a href="#"><li>Места</li></a>
+                <a href="#tab-transport" class="tab"><li>Маршрут</li></a>
+                <a href="#tab-about-transport" class="tab"><li>Информация</li></a>
+                <a href="#tab-popular-place" class="tab"><li>Места</li></a>
             </ul>
          </nav>
-        <section class="section-item">
+        <section class="section-item" open-by-tab="tab-transport">
             <div class="section-title">
                 <h2>Маршрут</h2>
             </div>
@@ -45,7 +45,7 @@
                 </form>
             </div>
         </section>
-            <section class="section-item">
+            <section id="transport" class="section-item" open-by-tab="tab-transport">
                 <div class="section-title">
                     <h2>Транспорт</h2>
                     <select>
@@ -59,7 +59,7 @@
                 <div class="content">
                     <div class="transport-item">
                         <div class="header-list">
-                            <img class="img-list arrow-close" src="img/alpha-list.svg" alt="Развернуть список">
+                            <img class="img-list" src="img/alpha-list.svg" alt="Развернуть список">
                             <label class="spoiler">
                                     <h3>№8 Трамвай</h3>
                                     <div class="base-info">
@@ -74,7 +74,22 @@
                                     <input type="checkbox" name="route-number">
                             </label>
                         </div>
-                        <div class="body-list body-list-close">
+                        <div class="body-list">
+                            <label class="body-list-item">
+                                <input type="checkbox" name="s" id="">
+                                <span class="icon-check"></span>
+                                <div class="about-transport">
+                                    <h4>Номер машины 19</h4>
+                                    <div class="base-info">
+                                        <span>Местоположение: улица Энгельса</span>
+                                    </div>
+                                    <div class="time-interval">
+                                        <span>15:20</span>
+                                        <span>16:30</span>
+                                        <span>17:40</span>
+                                    </div>
+                                </div>
+                            </label>
                             <label class="body-list-item">
                                 <input type="checkbox" name="s" id="">
                                 <span class="icon-check"></span>
@@ -109,7 +124,7 @@
                     </div>
                     <div class="transport-item">
                         <div class="header-list">
-                            <img class="img-list arrow-close" src="img/alpha-list.svg" alt="Развернуть список">
+                            <img class="img-list" src="img/alpha-list.svg" alt="Развернуть список">
                             <label class="spoiler">
                                     <h3>№8 Трамвай</h3>
                                     <div class="base-info">
@@ -124,7 +139,7 @@
                                     <input type="checkbox" name="route-number">
                             </label>
                         </div>
-                        <div class="body-list body-list-close">
+                        <div class="body-list">
                             <label class="body-list-item">
                                 <input type="checkbox" name="s" id="">
                                 <span class="icon-check"></span>
@@ -159,7 +174,7 @@
                     </div>
                 </div>
             </section>
-            <section id="about-transport" class="section-item">
+            <section id="about-transport" class="section-item"  open-by-tab="tab-about-transport">
                 <div class="section-title">
                     <h2>О транспорте</h2>
                     <!-- Выполнить стилизацию -->
@@ -174,7 +189,7 @@
                 <div class="content">
                     <div class="transport-item">
                         <div class="header-list">
-                            <img class="img-list arrow-close" src="img/alpha-list.svg" alt="Развернуть список">
+                            <img class="img-list" src="img/alpha-list.svg" alt="Развернуть список">
                             <div class="spoiler">
                                     <h3>№8 Трамвай</h3>
                                     <div class="base-info">
@@ -186,7 +201,7 @@
                                     </div>
                                 </div>
                         </div>
-                        <div class="body-list body-list-close">
+                        <div class="body-list">
                             <div class="body-list-item">
                                 <span class="icon-check"></span>
                                 <div class="about-transport">
@@ -204,7 +219,7 @@
                     </div>
                 </div>
             </section>
-            <section id="popular-place" class="section-item">
+            <section class="section-item"  open-by-tab="tab-popular-place">
                 <div class="section-title">
                     <h2>Популярные места</h2>
                     <!-- Выполнить стилизацию -->

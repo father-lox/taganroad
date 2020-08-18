@@ -9,15 +9,8 @@
 @import "reset-style.css";
 @import "font-style.css";
 @import "defualt-style.css";
-/* @import "media.css"; */
-
-html {
-    /* height: 100%;
-    width: 100%; */
-}
 
 body {
-    /* min-height: 100%; */
     display: flex;
     font-family: "Tahoma Regular";
 }
@@ -34,7 +27,6 @@ body {
 .map {
     display: inline-flex;
     background-color: white;
-    /* position: fixed; */
     order: 1;
     width: 100vw;
     min-height: 100%;
@@ -43,7 +35,6 @@ body {
     align-items: center;
     font-size: 60px;
     font-family: "Tahoma Bold";
-    /* vertical-align: middle; */
 }
 
 header {
@@ -69,45 +60,42 @@ nav ul {
     display: flex;
 }
 
-nav ul a {
+nav ul li {
+    padding: 10px 0;
+}
+
+.tab {
     width: 100%;
     text-align: center;
     color: #757575;
     border-bottom: 3px solid #757575;
-    padding: 10px 0;
     transition: border 0.2s ease-in-out;
 }
 
-nav ul a:hover {
+.tab:hover {
     cursor: pointer;
     border-bottom-color: #419a6b;
 }
 
-nav ul a:hover:active,
-nav ul .activeURL {
+.tab:hover:active,
+.active-tab {
     border-bottom-color: #55c88e;
 }
 
-/* Проложить маршрут */
+.section-item {
+    display: none;
+}
+
+.active-tab-item 
+{
+    display: block;
+}
 
 .form-group {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
-/* .form-group input::before {
-    content: "";
-    display: block;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: #757575;
-    position: absolute;
-    left: -15px;
-    transition: background-color 0.4s ease-in-out;
-    z-index: 10;
-} */
 
 .form-group:not(:last-child) {
     margin-bottom: 20px;
@@ -142,7 +130,7 @@ nav ul .activeURL {
     top: 50%;
     transform: translate(0, -50%);
     left: -15px;
-    background-color: #757575;
+    background-color: #55c88e;
 
 }
 
@@ -168,14 +156,6 @@ nav ul .activeURL {
     transform: translate(0, 0);
     font-size: 10px;
 }
-
-/* Как изменять цвет точки? 
-.form-group input:focus ~ label:last-child,
-.form-group label:hover label::after,
-.form-group input:not(:placeholder-shown) ~ label::after {
-    background-color: #55c88e;
-    width: 199px;
-} */
 
 .form-group button {
     box-shadow: -3px 3px 10px rgba(204, 204, 204, 0.22);
@@ -208,16 +188,12 @@ nav ul .activeURL {
     width: 22px;
     margin: 0 21px 0 6px;
     transition: transform 0.3s ease-in-out;
-    transform: rotate(180deg);
-}
-
-.arrow-close {
     transform: rotate(0);
 }
 
-/* .img-list:hover {
-    transform: scale(1.2);
-} */
+.arrow-open {
+    transform: rotate(180deg);
+}
 
 .spoiler {
     border-right: 10px solid #757575;
@@ -225,6 +201,10 @@ nav ul .activeURL {
     padding: 10px 0;
     transition: border 0.4s ease-in-out;
     width: 100%;
+}
+
+.spoiler-check-show {
+    border-right-color: #55c88e;
 }
 
 .spoiler > *:not(:last-child),
@@ -278,12 +258,12 @@ nav ul .activeURL {
 }
 
 .body-list {
+    display: none;
     position: relative;
 }
 
-.body-list-close {
-    display: none;
-    /* visibility: hidden; */
+.body-list-open {
+    display: block;
 }
 
 .body-list::before {
@@ -402,6 +382,7 @@ nav ul .activeURL {
         min-height: auto;
         box-shadow: none;
         background-color: transparent;
+        overflow-y: auto;
     }
 
     .map {
