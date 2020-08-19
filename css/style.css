@@ -18,24 +18,14 @@ body {
 .bar {
     display: inline-block;
     min-width: 400px;
+    width: 25vw;
     min-height: fit-content;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
     background: white;
     overflow-y: scroll;
 }
 
-.map {
-    display: inline-flex;
-    background-color: white;
-    order: 1;
-    width: 100vw;
-    min-height: 100%;
-    z-index: -1;
-    justify-content: center;
-    align-items: center;
-    font-size: 60px;
-    font-family: "Tahoma Bold";
-}
+
 
 header {
     display: inline-flex;
@@ -445,3 +435,4 @@ nav ul li {
     max-width: 100%;
 }
 }
+

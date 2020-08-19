@@ -125,3 +125,4 @@ document.querySelectorAll("#transport .spoiler").forEach((item) => {
         toSelectAll(item);
     });
 });
+
