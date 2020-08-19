@@ -36,6 +36,10 @@ header {
     padding: 0 24px 0 34px;
 }
 
+#mobile-header {
+    display: none;
+}
+
 .logo {
     font-family: "Tahoma Bold";
     font-size: 24px;
@@ -359,11 +363,15 @@ nav ul li {
     max-width: 400px;
 }
 
+#map {
+    width: 70vw;
+    height: 100vh;
+}
 
 @media (max-width: 800px) {
     body {
-        display: block;
-        min-width: fit-content;
+        display: flex;
+        flex-flow: column-reverse;
         background-color: #f1f1f1;
     }
 
@@ -373,17 +381,23 @@ nav ul li {
         box-shadow: none;
         background-color: transparent;
         overflow-y: auto;
+        width: 100%;
+        z-index: 1;
     }
 
     .map {
         width: 100%;
-        min-height: 300px;
         display: block;
         z-index: 2;
         position: -webkit-sticky;
         position: sticky;
     }
 
+    #map {
+        width: 100vw;
+        height: 70vh;
+        margin-top: 30px;
+    }
     header {
         position: absolute;
         top: 0;
@@ -393,9 +407,14 @@ nav ul li {
         height: 30px;
         margin: 0;
         width: auto;
+        display: none;
         border-radius: 0 15px 15px 0;
     }
-
+    #mobile-header {
+        display: flex;
+        height: 30px; /* если менять, менять и margin-top у #map */
+        width: 100%;
+    }
     .logo {
         font-size: 18px;
     }
