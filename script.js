@@ -37,7 +37,7 @@ document.querySelectorAll(".form-group button").forEach(function(item) {
     
         if (fieldInput.value == "" && e.currentTarget.getAttribute("point") === "arrival") 
         {
-            //ЗДАЧА: Реализовать считывание геолокации пользователя
+            //ЗДАЧА: Реализовать считывание геолокации пользователя //ты тут перепутал (А) и (B)
             fieldInput.value = arrayAddresses[Math.floor(Math.random() * arrayAddresses.length)];
             e.currentTarget.textContent = "";
             e.currentTarget.classList.add("clear-field");
@@ -45,9 +45,27 @@ document.querySelectorAll(".form-group button").forEach(function(item) {
         else if (fieldInput.value == "" && e.currentTarget.getAttribute("point") === "departure")
         {
             //ЗАДАЧА: Реализовать считывание место прибытия путём клика в нужное место на карте
-            fieldInput.value = arrayAddresses[Math.floor(Math.random() * arrayAddresses.length)];
-            e.currentTarget.textContent = "";
-            e.currentTarget.classList.add("clear-field");
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition,showAlert);
+              }
+              function showPosition(position) {
+ 
+                let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyDxvXuznL3aWv-ISWr9I5nPIcI5Pv0jWgU`;
+                fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                fieldInput.value = data.results[0].address_components[1].long_name + ', ' + data.results[0].address_components[0].short_name;
+                this.isActive1 = true;
+                } )
+                .catch(err=> console.warn(err.message));
+                e.currentTarget.textContent = "";
+                e.currentTarget.classList.add("clear-field");
+              }
+              function showAlert() {
+                  alert('Не удалось получить местоположение');
+              }
+           
         }    
         else
         {
