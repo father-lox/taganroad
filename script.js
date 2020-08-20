@@ -56,7 +56,6 @@ document.querySelectorAll(".form-group button").forEach(function(item) {
                 .then(data => {
                     console.log(data);
                 fieldInput.value = data.results[0].address_components[1].long_name + ', ' + data.results[0].address_components[0].short_name;
-                this.isActive1 = true;
                 } )
                 .catch(err=> console.warn(err.message));
                 e.currentTarget.textContent = "";
@@ -144,3 +143,13 @@ document.querySelectorAll("#transport .spoiler").forEach((item) => {
     });
 });
 
+map.on('click', function(e) {
+    let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${e.latlng.lat},${e.latlng.lng}&key=AIzaSyDxvXuznL3aWv-ISWr9I5nPIcI5Pv0jWgU`;
+                fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    document.getElementById('to').value = data.results[0].address_components[1].long_name + ', ' + data.results[0].address_components[0].short_name;
+                } )
+                .catch(err=> console.warn(err.message));
+});
