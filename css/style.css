@@ -389,13 +389,12 @@ nav ul li {
         width: 100%;
         display: block;
         z-index: 2;
-        position: -webkit-sticky;
-        position: sticky;
+
     }
 
     #map {
         width: 100vw;
-        height: 70vh;
+        height: 40vh;
         margin-top: 30px;
     }
     header {
@@ -413,7 +412,7 @@ nav ul li {
     #mobile-header {
         display: flex;
         height: 30px; /* если менять, менять и margin-top у #map */
-        width: 100%;
+        width: 30%;
     }
     .logo {
         font-size: 18px;
