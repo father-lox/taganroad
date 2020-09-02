@@ -7,6 +7,9 @@
 //     6. Убирать выделение спойлера, когда в теле списка выбраны не все элементы
 
 // ТАБЫ
+let checkSave = true;
+
+
 document.querySelectorAll(".tab").forEach(function(item) {
     item.addEventListener("click", function(e) {
         e.preventDefault();
@@ -33,8 +36,6 @@ document.querySelector(".tab li").click(); //Выполняем программ
 document.querySelectorAll(".form-group button").forEach(function(item) {
     item.addEventListener("click", function (e) {
         let fieldInput = e.currentTarget.parentElement.firstElementChild.firstElementChild;
-        let arrayAddresses = ["ул. Некрасовская 44", "ул. Петровская 2", "ул. Победы 9"]; //Это массив временных данных - удалить в релизе
-    
         if (fieldInput.value == "" && e.currentTarget.getAttribute("point") === "arrival") 
         {
             //ЗДАЧА: Реализовать считывание геолокации пользователя //ты тут перепутал (А) и (B)
@@ -91,8 +92,19 @@ document.querySelectorAll(".form-group button").forEach(function(item) {
                   alert('Не удалось получить местоположение');
               }
         }
+
+        else if (    document.getElementById('buttonB').textContent == "save") {
+            checkSave = false;
+            document.getElementById('buttonB').textContent = "";
+            document.getElementById('buttonB').classList.add("clear-field");
+        }
+
         else
         {
+
+            if (fieldInput.id == "to") {
+                checkSave = true;
+            }
             fieldInput.value = "";
             e.currentTarget.classList.remove("clear-field");
             e.currentTarget.textContent = "auto";
@@ -169,8 +181,11 @@ document.querySelectorAll("#transport .spoiler").forEach((item) => {
 });
 
 map.on('click', function(e) {
-    document.getElementById('buttonB').textContent = "";
-    document.getElementById('buttonB').classList.add("clear-field");
+
+    if (checkSave) {
+
+    document.getElementById('buttonB').textContent = "save";
+   // document.getElementById('buttonB').classList.add("clear-field");
     let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${e.latlng.lat},${e.latlng.lng}&key=AIzaSyDxvXuznL3aWv-ISWr9I5nPIcI5Pv0jWgU`;
                 fetch(url)
                 .then(response => response.json())
@@ -179,4 +194,5 @@ map.on('click', function(e) {
                     document.getElementById('to').value = data.results[0].address_components[1].long_name + ', ' + data.results[0].address_components[0].short_name;
                 } )
                 .catch(err=> console.warn(err.message));
+            }
 });
