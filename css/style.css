@@ -412,7 +412,7 @@ nav ul li {
     #mobile-header {
         display: flex;
         height: 30px; /* если менять, менять и margin-top у #map */
-        width: 30%;
+        width: 100%;
     }
     .logo {
         font-size: 18px;
