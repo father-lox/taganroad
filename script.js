@@ -67,6 +67,30 @@ document.querySelectorAll(".form-group button").forEach(function(item) {
               }
            
         }    
+        else if (fieldInput.value == "" && e.currentTarget.getAttribute("point") === "departureplaces") {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition,showAlert);
+                
+              }
+              function showPosition(position) {
+                document.getElementById('buttonPlaces').textContent = "";
+                document.getElementById('buttonPlaces').classList.add("clear-field");
+            
+                let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyDxvXuznL3aWv-ISWr9I5nPIcI5Pv0jWgU`;
+                fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                fieldInput.value = data.results[0].address_components[1].long_name + ', ' + data.results[0].address_components[0].short_name;
+
+                } )
+                .catch(err=> console.warn(err.message));
+         
+              }
+              function showAlert() {
+                  alert('Не удалось получить местоположение');
+              }
+        }
         else
         {
             fieldInput.value = "";
