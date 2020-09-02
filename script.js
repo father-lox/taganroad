@@ -38,9 +38,7 @@ document.querySelectorAll(".form-group button").forEach(function(item) {
         if (fieldInput.value == "" && e.currentTarget.getAttribute("point") === "arrival") 
         {
             //ЗДАЧА: Реализовать считывание геолокации пользователя //ты тут перепутал (А) и (B)
-            fieldInput.value = arrayAddresses[Math.floor(Math.random() * arrayAddresses.length)];
-            e.currentTarget.textContent = "";
-            e.currentTarget.classList.add("clear-field");
+            alert('Выберите место на карте');
         }    
         else if (fieldInput.value == "" && e.currentTarget.getAttribute("point") === "departure")
         {
@@ -147,6 +145,8 @@ document.querySelectorAll("#transport .spoiler").forEach((item) => {
 });
 
 map.on('click', function(e) {
+    document.getElementById('buttonB').textContent = "";
+    document.getElementById('buttonB').classList.add("clear-field");
     let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${e.latlng.lat},${e.latlng.lng}&key=AIzaSyDxvXuznL3aWv-ISWr9I5nPIcI5Pv0jWgU`;
                 fetch(url)
                 .then(response => response.json())
