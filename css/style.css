@@ -383,6 +383,7 @@ nav ul li {
         overflow-y: auto;
         width: 100%;
         z-index: 1;
+        min-width: unset;
     }
 
     .map {
