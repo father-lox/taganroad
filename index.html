@@ -302,6 +302,8 @@ function CreateRoute() {
 var endCoordinates = [];
     const geocoder = new google.maps.Geocoder();
     const startAddress = document.getElementById("from").value + " Таганрог";
+    const endAddress = document.getElementById("to").value + " Таганрог";
+
   geocoder.geocode(
     {
       address: startAddress
@@ -312,34 +314,43 @@ var endCoordinates = [];
         startCoordinates[1] = results[0].geometry.location.lng();
 
         });
-var request = new XMLHttpRequest();
 
+    geocoder.geocode(
+    {
+      address: endAddress
+    },
+    (results, status) => {
+        console.log(results[0]);
+        endCoordinates[0] = results[0].geometry.location.lat();
+        endCoordinates[1] = results[0].geometry.location.lng();
 
-    
+        });   
+
+      setTimeout(function() {
+        var request = new XMLHttpRequest();
         console.log(startCoordinates[0]);
+        console.log(startCoordinates[1]);
+        request.open('GET', `https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248d682833474fb4806ad8717782a657f2c&start=${startCoordinates[1]},%20${startCoordinates[0]}&end=${endCoordinates[1]},%20${endCoordinates[0]}`);
+        request.setRequestHeader('Accept', 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8');
+        console.log("Выше коорды");
+        console.log(startCoordinates[0]);
+        request.onreadystatechange = function () {
+        if (this.readyState === 4) {
+            var obj = JSON.parse(this.responseText);
+            console.log(this.responseText);
+            for (i in obj.features[0].geometry.coordinates) {
+                var temp = obj.features[0].geometry.coordinates[i][0];
+                obj.features[0].geometry.coordinates[i][0] =  obj.features[0].geometry.coordinates[i][1];
+                obj.features[0].geometry.coordinates[i][1] = temp;
+            }
+            var polyline = L.polyline(obj.features[0].geometry.coordinates, {color: 'green'}).addTo(map);
+            map.fitBounds(polyline.getBounds());
+        }
+        };
+         request.send();
+                }, 1000);
 
-request.open('GET', 'https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248d682833474fb4806ad8717782a657f2c&start=38.893776,%2047.227909&end=38.893776,%2047.237909');
-
-request.setRequestHeader('Accept', 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8');
-
-request.onreadystatechange = function () {
-  if (this.readyState === 4) {
-    var obj = JSON.parse(this.responseText);
-
-    for (i in obj.features[0].geometry.coordinates) {
-        var temp = obj.features[0].geometry.coordinates[i][0];
-        obj.features[0].geometry.coordinates[i][0] =  obj.features[0].geometry.coordinates[i][1];
-        obj.features[0].geometry.coordinates[i][1] = temp;
-    }
-    var polyline = L.polyline(obj.features[0].geometry.coordinates, {color: 'red'}).addTo(map);
-     map.fitBounds(polyline.getBounds());
-
-
-
-  }
-};
-
-request.send();
+//end
 }
 
 
