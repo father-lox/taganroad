@@ -10,6 +10,9 @@
 let checkSave = true;
 
 
+
+
+
 document.querySelectorAll(".tab").forEach(function(item) {
     item.addEventListener("click", function(e) {
         e.preventDefault();
@@ -196,3 +199,6 @@ map.on('click', function(e) {
                 .catch(err=> console.warn(err.message));
             }
 });
+
+
+
