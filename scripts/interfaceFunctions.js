@@ -168,3 +168,49 @@ document.querySelectorAll("#transport .spoiler").forEach((item) => {
     });
 });
 
+function inputKeyPress(inputId) {
+    if (inputId === 'to'){
+        if (document.getElementById('to').value.length > 0)  {
+            document.getElementById('buttonB').innerHTML = "";
+            document.getElementById('buttonB').classList.remove("active-tab");
+            document.getElementById('buttonB').classList.remove("active-tab-item");
+            document.getElementById('buttonB').classList.add("clear-field");
+        }
+        else {
+            document.getElementById('buttonB').innerHTML = "auto";
+            document.getElementById('buttonB').classList.add("active-tab");
+            document.getElementById('buttonB').classList.add("active-tab-item");
+            document.getElementById('buttonB').classList.remove("clear-field");
+        }
+
+    }
+    else if (inputId === 'from') {
+        if (document.getElementById('from').value.length > 0)  {
+            document.getElementById('buttonA').innerHTML = "";
+            document.getElementById('buttonA').classList.remove("active-tab");
+            document.getElementById('buttonA').classList.remove("active-tab-item");
+            document.getElementById('buttonA').classList.add("clear-field");
+        }
+        else {
+            document.getElementById('buttonA').innerHTML = "auto";
+            document.getElementById('buttonA').classList.add("active-tab");
+            document.getElementById('buttonA').classList.add("active-tab-item");
+            document.getElementById('buttonA').classList.remove("clear-field");
+        }
+    }
+    else if (inputId === 'inputPlaces') {
+        if (document.getElementById('inputPlaces').value.length > 0)  {
+            document.getElementById('buttonPlaces').innerHTML = "";
+            document.getElementById('buttonPlaces').classList.remove("active-tab");
+            document.getElementById('buttonPlaces').classList.remove("active-tab-item");
+            document.getElementById('buttonPlaces').classList.add("clear-field");
+        }
+        else {
+            document.getElementById('buttonPlaces').innerHTML = "auto";
+            document.getElementById('buttonPlaces').classList.add("active-tab");
+            document.getElementById('buttonPlaces').classList.add("active-tab-item");
+            document.getElementById('buttonPlaces').classList.remove("clear-field");
+        }
+    }
+    
+}

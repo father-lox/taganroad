@@ -39,14 +39,14 @@
                 <form class="route">
                     <div class="form-group">
                         <label>
-                            <input type="text" name="from" id="from" placeholder=" " >
+                            <input type="text" name="from" id="from" placeholder=" " onkeyup="inputKeyPress('from')">
                             <span class="help-message">Введите адрес отправления (A)</span>
                         </label>
                         <button type="button" point="departure" id="buttonA">auto</button>
                     </div>
                     <div class="form-group">
                         <label>
-                            <input type="text" name="to" id="to" placeholder=" ">
+                            <input type="text" name="to" id="to" placeholder=" " onkeyup="inputKeyPress('to')">
                             <span class="help-message">Введите адрес прибытия (B)</span>
                         </label>
                         <button type="button" point="arrival" id="buttonB">auto</button>    
@@ -254,7 +254,7 @@
                         </div>
                         <div class="form-group">
                             <label>
-                                <input type="text" placeholder=" ">
+                                <input type="text" placeholder=" " id="inputPlaces" onkeyup="inputKeyPress('inputPlaces')"> 
                                 <span class="help-message">Введите адрес отправления (A)</span>
                             </label>
                             <button type="button" point="departureplaces" id="buttonPlaces">auto</button>
