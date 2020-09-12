@@ -19,6 +19,8 @@ map.on('click', function(e) {
 //Ф-ия, создающая маршрут
 
 function CreateRoute() {
+
+
     var startCoordinates = [];
     var endCoordinates = [];
     const geocoder = new google.maps.Geocoder();
@@ -55,12 +57,24 @@ function CreateRoute() {
                     routeObj.features[0].geometry.coordinates[i][0] =  routeObj.features[0].geometry.coordinates[i][1];
                     routeObj.features[0].geometry.coordinates[i][1] = temp;
                 }
+
+
+                for(i in map._layers) {
+                    map.eachLayer((layer) => {
+                        if (layer._url != 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png') {
+                        layer.remove();
+                        }
+                        });
+                    }
+
+
                 var polyline = L.polyline(routeObj.features[0].geometry.coordinates, {color: 'green'}).addTo(map);
                 var svgAlphaA = '<img src="./img/alpha-pointer-A.svg" height="40" width="40">';
                 var iconAlphaA = L.divIcon({ html: svgAlphaA, className: 'alpha-pointer-css', iconAnchor: [20,39]  });
+                //map._panes.markerPane.remove();
                 L.marker(routeObj.features[0].geometry.coordinates[0], { icon: iconAlphaA }).addTo(map);
                 var svgAlphaB = '<img src="./img/alpha-pointer-B.svg" height="40" width="40">';
-                var iconAlphaB = L.divIcon({ html: svgAlphaB, className: 'alpha-pointer-css',  iconAnchor: [20,39]  });
+                var iconAlphaB = L.divIcon({ html: svgAlphaB, className: 'alpha-pointer-css',  iconAnchor: [20,39]    });
                 L.marker(routeObj.features[0].geometry.coordinates[routeObj.features[0].geometry.coordinates.length - 1], { icon: iconAlphaB }).addTo(map);
                 map.fitBounds(polyline.getBounds());
             }};
