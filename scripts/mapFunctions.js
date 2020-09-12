@@ -56,6 +56,12 @@ function CreateRoute() {
                     routeObj.features[0].geometry.coordinates[i][1] = temp;
                 }
                 var polyline = L.polyline(routeObj.features[0].geometry.coordinates, {color: 'green'}).addTo(map);
+                var svgAlphaA = '<img src="./img/alpha-pointer-A.svg" height="40" width="40">';
+                var iconAlphaA = L.divIcon({ html: svgAlphaA, className: 'alpha-pointer-css', iconAnchor: [20,39]  });
+                L.marker(routeObj.features[0].geometry.coordinates[0], { icon: iconAlphaA }).addTo(map);
+                var svgAlphaB = '<img src="./img/alpha-pointer-B.svg" height="40" width="40">';
+                var iconAlphaB = L.divIcon({ html: svgAlphaB, className: 'alpha-pointer-css',  iconAnchor: [20,39]  });
+                L.marker(routeObj.features[0].geometry.coordinates[routeObj.features[0].geometry.coordinates.length - 1], { icon: iconAlphaB }).addTo(map);
                 map.fitBounds(polyline.getBounds());
             }};
             request.send();
