@@ -47,7 +47,7 @@ function CreateRoute() {
 
         setTimeout(function() {
             var request = new XMLHttpRequest();
-            request.open('GET', `https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248d682833474fb4806ad8717782a657f2c&start=${startCoordinates[1]},%20${startCoordinates[0]}&end=${endCoordinates[1]},%20${endCoordinates[0]}`);
+            request.open('GET', `https://api.openrouteservice.org/v2/directions/foot-walking?api_key=5b3ce3597851110001cf6248d682833474fb4806ad8717782a657f2c&start=${startCoordinates[1]},%20${startCoordinates[0]}&end=${endCoordinates[1]},%20${endCoordinates[0]}`);
             request.setRequestHeader('Accept', 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8');
             request.onreadystatechange = function () {
             if (this.readyState === 4) {
@@ -62,7 +62,7 @@ function CreateRoute() {
                 for(i in map._layers) {
                     map.eachLayer((layer) => {
                         if (layer._url != 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png') {
-                        layer.remove();
+                            layer.remove();
                         }
                         });
                     }
