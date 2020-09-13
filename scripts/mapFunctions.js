@@ -2,7 +2,12 @@
 
 map.on('click', function(e) {
 
+
     if (checkSave) {
+
+        document.getElementById('buttonB').classList.add("active-tab");
+        document.getElementById('buttonB').classList.add("active-tab-item");
+        document.getElementById('buttonB').classList.remove("clear-field");
 
         document.getElementById('buttonB').textContent = "save";
         let googleGeocoderUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${e.latlng.lat},${e.latlng.lng}&key=AIzaSyDxvXuznL3aWv-ISWr9I5nPIcI5Pv0jWgU`;
