@@ -1,3 +1,5 @@
+(function () {
+
 //Функция, отвечающая за клик по карте
 
 map.on('click', function(e) {
@@ -21,6 +23,9 @@ map.on('click', function(e) {
 });
 
 //Ф-ия, создающая маршрут
+
+document.getElementById("buttonCreateRoute").addEventListener("click", CreateRoute);
+
 
 function CreateRoute() {
 
@@ -85,10 +90,11 @@ function CreateRoute() {
                 L.marker(routeObj.features[0].geometry.coordinates[routeObj.features[0].geometry.coordinates.length - 1], { icon: iconAlphaB }).addTo(map);
                 map.fitBounds(polyline.getBounds());
             }
-        else {
-            alert('Сервер не отвечает , попробуйте еще раз. Статус ошибки ' + this.status);
-            return 0;
-        }};
+            else {
+                alert('Сервер не отвечает , попробуйте еще раз. Статус ошибки ' + this.status);
+                return 0;
+            }};
             request.send();
                 }, 500);
 }
+}());

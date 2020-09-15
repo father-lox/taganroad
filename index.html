@@ -39,21 +39,21 @@
                 <form class="route">
                     <div class="form-group">
                         <label>
-                            <input type="text" name="from" id="from" placeholder=" " onkeyup="inputKeyPress('from')">
+                            <input type="text" name="from" class="inputAdress" id="from" placeholder=" " onkeyup="inputKeyPress('from')">
                             <span class="help-message">Введите адрес отправления (A)</span>
                         </label>
                         <button type="button" point="departure" id="buttonA">auto</button>
                     </div>
                     <div class="form-group">
                         <label>
-                            <input type="text" name="to" id="to" placeholder=" " onkeyup="inputKeyPress('to')">
+                            <input type="text" name="to" class="inputAdress" id="to" placeholder=" " onkeyup="inputKeyPress('to')">
                             <span class="help-message">Введите адрес прибытия (B)</span>
                         </label>
                         <button type="button" point="arrival" id="buttonB" saved="false">auto</button>    
 
                     </div>
                 </form>
-                <button onclick = "CreateRoute()" type="button">Построить маршрут</button>
+                <button id="buttonCreateRoute" type="button">Построить маршрут</button>
             </div>
         </section>
             <section id="transport" class="section-item" open-by-tab="tab-transport">
@@ -254,7 +254,7 @@
                         </div>
                         <div class="form-group">
                             <label>
-                                <input type="text" placeholder=" " id="inputPlaces" onkeyup="inputKeyPress('inputPlaces')"> 
+                                <input type="text" placeholder=" " class="inputAdress" id="inputPlaces" onkeyup="inputKeyPress('inputPlaces')"> 
                                 <span class="help-message">Введите адрес отправления (A)</span>
                             </label>
                             <button type="button" point="departureplaces" id="buttonPlaces">auto</button>

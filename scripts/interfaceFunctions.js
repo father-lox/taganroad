@@ -1,3 +1,5 @@
+(function () {
+
 document.querySelectorAll(".tab").forEach(function(item) {
     item.addEventListener("click", function(e) {
         e.preventDefault();
@@ -166,6 +168,12 @@ document.querySelectorAll("#transport .spoiler").forEach((item) => {
     });
 });
 
+document.querySelectorAll('.inputAdress').forEach((item) => {
+    item.addEventListener('keyup', function() {
+        inputKeyPress(item.id);
+    });
+});
+
 function inputKeyPress(inputId) {
 
     let buttonsDictionary = new Map();
@@ -185,3 +193,5 @@ function inputKeyPress(inputId) {
     }
     
 }
+
+}());
