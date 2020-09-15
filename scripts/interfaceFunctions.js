@@ -1,5 +1,3 @@
-let checkSave = true;
-
 document.querySelectorAll(".tab").forEach(function(item) {
     item.addEventListener("click", function(e) {
         e.preventDefault();
@@ -82,7 +80,7 @@ document.querySelectorAll(".form-group button").forEach(function(item) {
         }
 
         else if (    document.getElementById('buttonB').textContent == "save") {
-            checkSave = false;
+            document.getElementById('buttonB').setAttribute('saved', 'true');
             document.getElementById('buttonB').textContent = "";
             document.getElementById('buttonB').classList.add("clear-field");
         }
@@ -91,7 +89,7 @@ document.querySelectorAll(".form-group button").forEach(function(item) {
         {
 
             if (fieldInput.id == "to") {
-                checkSave = true;
+                document.getElementById('buttonB').setAttribute('saved', 'false');
             }
             fieldInput.value = "";
             e.currentTarget.classList.remove("clear-field");

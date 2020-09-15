@@ -3,7 +3,7 @@
 map.on('click', function(e) {
 
 
-    if (checkSave) {
+    if (document.getElementById('buttonB').getAttribute('saved') == "false") {
 
         document.getElementById('buttonB').classList.add("active-tab");
         document.getElementById('buttonB').classList.add("active-tab-item");
