@@ -20,11 +20,9 @@ map.on('click', function(e) {
             }
 });
 
-
 //Ф-ия, создающая маршрут
 
 function CreateRoute() {
-
 
     let startCoordinates = [];
     let endCoordinates = [];
@@ -51,16 +49,16 @@ function CreateRoute() {
             });   
 
         setTimeout(function() {
+            let requestHeaderFirstAttribute = 'Accept';
+            let requestHeaderSecondAttribute = 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8';
             let request = new XMLHttpRequest();
             request.open('GET', `https://api.openrouteservice.org/v2/directions/cycling-regular?api_key=5b3ce3597851110001cf6248d682833474fb4806ad8717782a657f2c&start=${startCoordinates[1]},%20${startCoordinates[0]}&end=${endCoordinates[1]},%20${endCoordinates[0]}`);
-            request.setRequestHeader('Accept', 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8');
-            request.onreadystatechange = function () {
+            request.setRequestHeader(requestHeaderFirstAttribute, requestHeaderSecondAttribute);
+            request.onload = function () {
               
-            if (this.readyState === 4) {
-                if (this.status != 200 ) {
-                    alert('Сервер не отвечает ' + this.status);
-                    return 1;
-                }  
+                if (this.status == 200 ) {
+                   
+                  
                 let routeObj = JSON.parse(this.responseText);
                 for (i in routeObj.features[0].geometry.coordinates) {
                     let temp = routeObj.features[0].geometry.coordinates[i][0];
@@ -81,13 +79,16 @@ function CreateRoute() {
                 let polyline = L.polyline(routeObj.features[0].geometry.coordinates, {color: 'green'}).addTo(map);
                 let svgAlphaA = '<img src="./img/alpha-pointer-A.svg" height="40" width="40">';
                 let iconAlphaA = L.divIcon({ html: svgAlphaA, className: 'alpha-pointer-css', iconAnchor: [20,39]  });
-                //map._panes.markerPane.remove();
                 L.marker(routeObj.features[0].geometry.coordinates[0], { icon: iconAlphaA }).addTo(map);
                 let svgAlphaB = '<img src="./img/alpha-pointer-B.svg" height="40" width="40">';
                 let iconAlphaB = L.divIcon({ html: svgAlphaB, className: 'alpha-pointer-css',  iconAnchor: [20,39]    });
                 L.marker(routeObj.features[0].geometry.coordinates[routeObj.features[0].geometry.coordinates.length - 1], { icon: iconAlphaB }).addTo(map);
                 map.fitBounds(polyline.getBounds());
-            }};
+            }
+        else {
+            alert('Сервер не отвечает , попробуйте еще раз. Статус ошибки ' + this.status);
+            return 0;
+        }};
             request.send();
                 }, 500);
 }
