@@ -169,29 +169,23 @@ document.querySelectorAll("#transport .spoiler").forEach((item) => {
 });
 
 document.querySelectorAll('.inputAdress').forEach((item) => {
-    item.addEventListener('keyup', function() {
-        inputKeyPress(item.id);
+    item.addEventListener('keyup', function(e) {
+        let rightButton = e.currentTarget.parentElement.parentElement.lastElementChild;
+        let activeTabClasses = ["active-tab", "active-tab-item"];
+        if (e.currentTarget.value.length > 0) {
+            rightButton.innerHTML = "";
+            rightButton.classList.remove(...activeTabClasses);
+            rightButton.classList.add("clear-field");
+        }
+        else {
+            rightButton.innerHTML = "auto";
+            rightButton.classList.add(...activeTabClasses);
+            rightButton.classList.remove("clear-field");
+        }
+
     });
 });
 
-function inputKeyPress(inputId) {
 
-    let buttonsDictionary = new Map();
-    buttonsDictionary.set('to', 'buttonB').set('from','buttonA').set('inputPlaces','buttonPlaces');
-    let rightButton = document.getElementById(buttonsDictionary.get(inputId));
-    if (document.getElementById(inputId).value.length>0) {
-        rightButton.innerHTML = "";
-        rightButton.classList.remove("active-tab");
-        rightButton.classList.remove("active-tab-item");
-        rightButton.classList.add("clear-field");
-    }
-    else {
-        rightButton.innerHTML = "auto";
-        rightButton.classList.add("active-tab");
-        rightButton.classList.add("active-tab-item");
-        rightButton.classList.remove("clear-field");
-    }
-    
-}
 
 }());
