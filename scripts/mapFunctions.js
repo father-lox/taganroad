@@ -1,6 +1,9 @@
 "use strict";
 (function () {
-
+    let svgAlphaB = '<img src="./img/alpha-pointer-B.svg" height="40" width="40">';
+    let iconAlphaB = L.divIcon({ html: svgAlphaB, className: 'alpha-pointer-css',  iconAnchor: [20,39]    });
+    let svgAlphaA = '<img src="./img/alpha-pointer-A.svg" height="40" width="40">';
+    let iconAlphaA = L.divIcon({ html: svgAlphaA, className: 'alpha-pointer-css', iconAnchor: [20,39]  });
 //Функция, отвечающая за клик по карте
 
 map.on('click', function(e) {
@@ -10,13 +13,23 @@ map.on('click', function(e) {
         document.getElementById('buttonB').classList.add("active-tab");
         document.getElementById('buttonB').classList.add("active-tab-item");
         document.getElementById('buttonB').classList.remove("clear-field");
-
         document.getElementById('buttonB').textContent = "save";
+        
         let googleGeocoderUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${e.latlng.lat},${e.latlng.lng}&key=AIzaSyDxvXuznL3aWv-ISWr9I5nPIcI5Pv0jWgU`;
                 fetch(googleGeocoderUrl)
                 .then(response => response.json())
                 .then(data => {
+                    let i;
+                    for(i in map._layers) {
+                        map.eachLayer((layer) => {
+                            if (layer._url != 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png') {
+                                layer.remove();
+                            }
+                        });
+                    }
                     document.getElementById('to').value = data.results[0].address_components[1].long_name + ', ' + data.results[0].address_components[0].short_name;
+                    let markerB = L.marker(e.latlng, { icon: iconAlphaB });
+                    markerB.addTo(map);
                     } )
                 .catch(err=> console.warn(err.message));
             }
@@ -81,11 +94,7 @@ function CreateRoute() {
                     });
                 }
 
-
                 let polyline = L.polyline(routeObj.features[0].geometry.coordinates, {color: 'green'}).addTo(map);
-
-                let svgAlphaA = '<img src="./img/alpha-pointer-A.svg" height="40" width="40">';
-                let iconAlphaA = L.divIcon({ html: svgAlphaA, className: 'alpha-pointer-css', iconAnchor: [20,39]  });
                 let markerA =  L.marker(routeObj.features[0].geometry.coordinates[0], { icon: iconAlphaA });
                 let animatedMarkerCreationStyles = ["animate__animated", "animate__zoomIn", "animate__fast"]
                 markerA.on('add', function() {
@@ -93,8 +102,7 @@ function CreateRoute() {
                 });
                 markerA.addTo(map);
 
-                let svgAlphaB = '<img src="./img/alpha-pointer-B.svg" height="40" width="40">';
-                let iconAlphaB = L.divIcon({ html: svgAlphaB, className: 'alpha-pointer-css',  iconAnchor: [20,39]    });
+                
                 let markerB = L.marker(routeObj.features[0].geometry.coordinates[routeObj.features[0].geometry.coordinates.length - 1], { icon: iconAlphaB });
                 markerB.on('add', function() {
                     markerB._icon.classList.add(...animatedMarkerCreationStyles);
