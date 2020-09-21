@@ -1,3 +1,4 @@
+"use strict";
 (function () {
 
 document.querySelectorAll(".tab").forEach(function(item) {
@@ -44,7 +45,6 @@ document.querySelectorAll(".form-group button").forEach(function(item) {
                 fetch(url)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
                 fieldInput.value = data.results[0].address_components[1].long_name + ', ' + data.results[0].address_components[0].short_name;
 
                 } )
@@ -69,7 +69,6 @@ document.querySelectorAll(".form-group button").forEach(function(item) {
                 fetch(url)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
                 fieldInput.value = data.results[0].address_components[1].long_name + ', ' + data.results[0].address_components[0].short_name;
 
                 } )
@@ -172,7 +171,7 @@ document.querySelectorAll('.inputAdress').forEach((item) => {
     item.addEventListener('keyup', function(e) {
         let rightButton = e.currentTarget.parentElement.parentElement.lastElementChild;
         let activeTabClasses = ["active-tab", "active-tab-item"];
-        if (e.currentTarget.value.length > 0) {
+        if (e.currentTarget.value.length) {
             rightButton.innerHTML = "";
             rightButton.classList.remove(...activeTabClasses);
             rightButton.classList.add("clear-field");
