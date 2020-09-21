@@ -1,6 +1,5 @@
 "use strict";
 (function () {
-
 document.querySelectorAll(".tab").forEach(function(item) {
     item.addEventListener("click", function(e) {
         e.preventDefault();
@@ -27,6 +26,8 @@ document.querySelector(".tab li").click(); //Выполняем программ
 document.querySelectorAll(".form-group button").forEach(function(item) {
     item.addEventListener("click", function (e) {
         let fieldInput = e.currentTarget.parentElement.firstElementChild.firstElementChild;
+        let currentButton = e.currentTarget;
+
         if (fieldInput.value == "" && e.currentTarget.getAttribute("point") === "arrival") 
         {
             alert('Выберите место на карте');
@@ -34,13 +35,12 @@ document.querySelectorAll(".form-group button").forEach(function(item) {
         else if (fieldInput.value == "" && e.currentTarget.getAttribute("point") === "departure")
         {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition,showAlert);
-                
+                navigator.geolocation.getCurrentPosition(showPosition,showAlert);       
               }
               function showPosition(position) {
                 document.getElementById('buttonA').textContent = "";
                 document.getElementById('buttonA').classList.add("clear-field");
-            
+
                 let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyDxvXuznL3aWv-ISWr9I5nPIcI5Pv0jWgU`;
                 fetch(url)
                 .then(response => response.json())
@@ -58,12 +58,11 @@ document.querySelectorAll(".form-group button").forEach(function(item) {
         }    
         else if (fieldInput.value == "" && e.currentTarget.getAttribute("point") === "departureplaces") {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition,showAlert);
-                
+                navigator.geolocation.getCurrentPosition(showPosition,showAlert);       
               }
               function showPosition(position) {
-                document.getElementById('buttonPlaces').textContent = "";
-                document.getElementById('buttonPlaces').classList.add("clear-field");
+                currentButton.textContent = "";
+                currentButton.classList.add("clear-field");
             
                 let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyDxvXuznL3aWv-ISWr9I5nPIcI5Pv0jWgU`;
                 fetch(url)
@@ -80,17 +79,16 @@ document.querySelectorAll(".form-group button").forEach(function(item) {
               }
         }
 
-        else if (    document.getElementById('buttonB').textContent == "save") {
-            document.getElementById('buttonB').setAttribute('saved', 'true');
-            document.getElementById('buttonB').textContent = "";
-            document.getElementById('buttonB').classList.add("clear-field");
+        else if (    currentButton.textContent == "save" && e.currentTarget.getAttribute("point") === "arrival") {
+            currentButton.setAttribute('saved', 'true');
+            currentButton.textContent = "";
+            currentButton.classList.add("clear-field");
         }
 
         else
         {
-
             if (fieldInput.id == "to") {
-                document.getElementById('buttonB').setAttribute('saved', 'false');
+                currentButton.setAttribute('saved', 'false');
             }
             fieldInput.value = "";
             e.currentTarget.classList.remove("clear-field");
@@ -171,20 +169,47 @@ document.querySelectorAll('.inputAdress').forEach((item) => {
     item.addEventListener('keyup', function(e) {
         let rightButton = e.currentTarget.parentElement.parentElement.lastElementChild;
         let activeTabClasses = ["active-tab", "active-tab-item"];
-        if (e.currentTarget.value.length) {
+
+        if (rightButton.innerHTML !== "save" && rightButton.saved==="false" ) {
+            if (e.currentTarget.value.length) {
+                rightButton.innerHTML = "";
+                rightButton.classList.remove(...activeTabClasses);
+                rightButton.classList.add("clear-field");
+            }
+            else {
+                rightButton.innerHTML = "auto";
+                rightButton.classList.add(...activeTabClasses);
+                rightButton.classList.remove("clear-field");
+            }
+    }
+    else {
+        if (!e.currentTarget.value.length){
+            rightButton.innerHTML = "auto";
+            rightButton.classList.remove("clear-field");
+            rightButton.setAttribute('saved','false');
+
+        }
+        else if (rightButton.getAttribute('saved') === "true") {
+            if (e.currentTarget.value.length){
+                rightButton.innerHTML = "";
+                rightButton.classList.add("clear-field");
+            }
+            else {
+                rightButton.innerHTML = "auto";
+                rightButton.classList.add("clear-field");
+
+
+            }
+        }
+        else if (e.currentTarget.id === "to")  {
+            rightButton.innerHTML = "save";
+
+        }
+        else  {
             rightButton.innerHTML = "";
-            rightButton.classList.remove(...activeTabClasses);
             rightButton.classList.add("clear-field");
         }
-        else {
-            rightButton.innerHTML = "auto";
-            rightButton.classList.add(...activeTabClasses);
-            rightButton.classList.remove("clear-field");
-        }
-
+    }
     });
 });
-
-
-
 }());

@@ -83,6 +83,7 @@ function CreateRoute() {
 
 
                 let polyline = L.polyline(routeObj.features[0].geometry.coordinates, {color: 'green'}).addTo(map);
+
                 let svgAlphaA = '<img src="./img/alpha-pointer-A.svg" height="40" width="40">';
                 let iconAlphaA = L.divIcon({ html: svgAlphaA, className: 'alpha-pointer-css', iconAnchor: [20,39]  });
                 let markerA =  L.marker(routeObj.features[0].geometry.coordinates[0], { icon: iconAlphaA });
@@ -91,6 +92,7 @@ function CreateRoute() {
                     markerA._icon.classList.add(...animatedMarkerCreationStyles);
                 });
                 markerA.addTo(map);
+
                 let svgAlphaB = '<img src="./img/alpha-pointer-B.svg" height="40" width="40">';
                 let iconAlphaB = L.divIcon({ html: svgAlphaB, className: 'alpha-pointer-css',  iconAnchor: [20,39]    });
                 let markerB = L.marker(routeObj.features[0].geometry.coordinates[routeObj.features[0].geometry.coordinates.length - 1], { icon: iconAlphaB });
@@ -98,6 +100,7 @@ function CreateRoute() {
                     markerB._icon.classList.add(...animatedMarkerCreationStyles);
                 });
                 markerB.addTo(map);
+
                 map.fitBounds(polyline.getBounds());
             }
             else {
