@@ -14,7 +14,7 @@ map.on('click', function(e) {
         document.getElementById('buttonB').classList.add("active-tab-item");
         document.getElementById('buttonB').classList.remove("clear-field");
         document.getElementById('buttonB').textContent = "save";
-        
+
         let googleGeocoderUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${e.latlng.lat},${e.latlng.lng}&key=AIzaSyDxvXuznL3aWv-ISWr9I5nPIcI5Pv0jWgU`;
                 fetch(googleGeocoderUrl)
                 .then(response => response.json())
@@ -110,12 +110,13 @@ function CreateRoute() {
                 markerB.addTo(map);
 
                 map.fitBounds(polyline.getBounds());
+                
             }
             else {
                 alert('Сервер не отвечает , попробуйте еще раз. Статус ошибки ' + this.status);
                 return 0;
             }};
             request.send();
-                }, 800);
+                }, 1100);
 }
 }());

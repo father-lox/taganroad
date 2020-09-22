@@ -30,6 +30,7 @@ document.querySelectorAll(".form-group button").forEach(function(item) {
 
         if (fieldInput.value == "" && e.currentTarget.getAttribute("point") === "arrival") 
         {
+            currentButton.innerHTML = "save";
             alert('Выберите место на карте');
         }    
         else if (fieldInput.value == "" && e.currentTarget.getAttribute("point") === "departure")
