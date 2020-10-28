@@ -1,0 +1,12 @@
+---
+deployment:
+  tasks:
+  - export DEPLOYPATH=/home/taganroa/public_html/
+  - /bin/cp -R css $DEPLOYPATH
+  - /bin/cp -R fonts $DEPLOYPATH
+  - /bin/cp -R gps $DEPLOYPATH
+  - /bin/cp -R img $DEPLOYPATH
+  - /bin/cp -R php $DEPLOYPATH
+  - /bin/cp -R scripts $DEPLOYPATH
+  - /bin/cp index.php $DEPLOYPATH
+  
